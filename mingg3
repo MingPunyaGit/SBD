@@ -16,3 +16,12 @@ Create table pegawai (
     -> CONSTRAINT namaKlinikFK FOREIGN  KEY (namaKlinik) REFERENCES klinik(namaKlinik)
     -> );
 Query OK, 0 rows affected (0.055 sec)
+
+[klinik]> alter table pegawai
+    -> add constraint RI
+    -> foreign key (namaKlinik)
+    -> references Klinik(namaKlinik)
+    -> on delete cascade
+    -> on update cascade;
+Query OK, 0 rows affected (0.073 sec)
+Records: 0  Duplicates: 0  Warnings: 0

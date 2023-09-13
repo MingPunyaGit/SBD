@@ -8,3 +8,11 @@ MariaDB [klinik]> Create table klinik (
     -> namaRS VARCHAR(100)
     -> );
 Query OK, 0 rows affected (0.058 sec)
+
+Create table pegawai (
+    -> nip CHAR(5) PRIMARY KEY,
+    -> namaPegawai VARCHAR(255) NOT NULL,
+    -> namaKlinik VARCHAR(100),
+    -> CONSTRAINT namaKlinikFK FOREIGN  KEY (namaKlinik) REFERENCES klinik(namaKlinik)
+    -> );
+Query OK, 0 rows affected (0.055 sec)

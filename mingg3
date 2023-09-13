@@ -1,0 +1,10 @@
+MariaDB [(none)]> create database klinik;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> use klinik
+Database changed
+MariaDB [klinik]> Create table klinik (
+    -> namaKlinik VARCHAR(100) PRIMARY KEY,
+    -> namaRS VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.058 sec)

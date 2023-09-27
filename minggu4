@@ -1,0 +1,34 @@
+CREATE TABLE matakuliah ( 
+  idMtk varchar(8) PRIMARY KEY, 
+  namaMtk Text NOT null, 
+  namaProdi varchar(50) NOT null, 
+  sks int(1) not null 
+);
+
+INSERT INTO matakuliah VALUES
+('BIO-101', 'Pengantar Biologi', 'Biologi', 4),
+('BIO-301', 'Genetika', 'Biologi', 4),
+('BIO-399', 'Biologi Komputasional', 'Biologi', 3),
+('TI-101', 'Teknologi Komputer', 'Informatika', 4),
+('TI-190', 'Game Design', 'Informatika', 4),
+('TI-315', 'Sistem Basis Data', 'Informatika', 3),
+('TI-319', 'Pemrograman Web', 'Informatika', 3),
+('DP-322', 'Estetika Produk', 'Desain Produk', 3),
+('AK-181', 'Perpajakan', 'Akuntansi', 3),
+('AR-351', 'Analisis Struktur I', 'Arsitektur', 3),
+('KD-200', 'Anatomi I', 'Kedokteran', 3),
+('PB-255', 'Grammar', 'Pendidikan Bahasa', 4);
+
+SELECT DISTINCT namaMtk,sks*25000 AS 'harga' FROM `matakuliah` where sks =3;
+
+SELECT namaMtk,sks AS 'harga' FROM `matakuliah` WHERE sks=2 OR sks= 3;
+
+SELECT namaMtk,sks AS 'harga' FROM `matakuliah` WHERE sks in (2,4,5); 
+
+SELECT namaMtk,sks AS 'harga' FROM `matakuliah` WHERE namaMtk LIKE '%m%'; mencari huruf khusus 
+
+SELECT namaMtk,sks AS 'harga' FROM `matakuliah` WHERE namaMtk LIKE '_i%'; mencari huruf ke 2
+
+SELECT namaMtk,sks AS 'harga' FROM `matakuliah` WHERE namaMtk LIKE '%a'; mencari huruf yang di belakang
+
+SELECT concat('Saya', 'Suka', 'Bakso') FROM `matakuliah`; menggabungkan kata 

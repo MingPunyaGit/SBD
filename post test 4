@@ -5,3 +5,9 @@ lokasi VARCHAR(50) NOT NULL,
 kapasitasTamu INT NOT NULL, 
 harga DECIMAL(9,2) NOT NULL, 
 rating FLOAT NOT NULL);
+
+INSERT INTO hotel (NamaHotel, Lokasi, KapasitasTamu, Harga, Rating) VALUES ('Hotel Santika', 'Jakarta', 150, 1200000, 4.4), ('Bali Paradise Resort', 'Bali', 200, 2500000, 4.7), 
+('Jogja Heritage Inn', 'Yogyakarta', 100, 800000, 4.2), 
+('Surabaya Grand Hotel', 'Surabaya', 180, 1600000, 4.5), 
+('Bandung Plaza Hotel', 'Bandung', 120, 1350000, 4.3), 
+('Tunjungan Hotel', 'Surabaya', 80, 1000000, 4);

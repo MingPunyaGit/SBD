@@ -11,3 +11,9 @@ INSERT INTO hotel (NamaHotel, Lokasi, KapasitasTamu, Harga, Rating) VALUES ('Hot
 ('Surabaya Grand Hotel', 'Surabaya', 180, 1600000, 4.5), 
 ('Bandung Plaza Hotel', 'Bandung', 120, 1350000, 4.3), 
 ('Tunjungan Hotel', 'Surabaya', 80, 1000000, 4);
+
+2.	Tampilkan semua hotel dalam lokasi Surabaya yang memiliki rating lebih dari sama dengan
+3.	Tampilkan nama hotel beserta harga untuk menginap selama tiga malam. (Catatan : format penulisan harga menggunakan format Rp dan kolom harga dinamai Harga Tiga Malam).
+4.	Tampilkan nama hotel dan kapasitas tamunya, diurutkan berdasarkan kapasitas tamu dari tamu paling terkecil hingga terbesar. (Catatan : namaHotel menjadi Nama Hotel dan kapasitasTamu menjadi Kapasitas) 
+5.	Tampilkan hotel yang lokasinya memiliki awalan kata “sura” (0.5 poin)
+Hasil akan seperti berikut: 

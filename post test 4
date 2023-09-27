@@ -1,0 +1,7 @@
+CREATE TABLE hotel (
+idhotel INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+namaHotel VARCHAR(50) NOT NULL, 
+lokasi VARCHAR(50) NOT NULL, 
+kapasitasTamu INT NOT NULL, 
+harga DECIMAL(9,2) NOT NULL, 
+rating FLOAT NOT NULL);

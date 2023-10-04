@@ -32,3 +32,38 @@ CREATE TABLE resep_obat (
     id_berobat INT(11) NOT NULL,
     PRIMARY KEY (id_obat, id_berobat)
 );
+CREATE TABLE obat (
+  id_obat VARCHAR(3) NOT NULL PRIMARY KEY,
+  nama_obat VARCHAR(50) NOT NULL,
+  ukuran_obat INT(11) NOT NULL,
+  satuan_obat ENUM('mg', 'ml', 'g') NOT NULL
+);
+CREATE TABLE pasien (
+  id_pasien VARCHAR(3) NOT NULL PRIMARY KEY,
+  nama_pasien VARCHAR(50) NOT NULL,
+  alamat_pasien VARCHAR(255) NOT NULL,
+  email VARCHAR(50) NOT NULL
+);
+CREATE TABLE dokter (
+  id_dokter VARCHAR(3) NOT NULL PRIMARY KEY,
+  nama_dokter VARCHAR(50) NOT NULL,
+  telp_dokter VARCHAR(15) NOT NULL
+);
+CREATE TABLE berobat (
+  id_berobat INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_pasien VARCHAR(3) NOT NULL,
+  id_dokter VARCHAR(3) NOT NULL,
+  tgl_berobat DATE NOT NULL,
+  keluhan_pasien VARCHAR(255) NOT NULL,
+  hasil_diagnosa VARCHAR(255) NOT NULL,
+  pelaksanaan_pengobatan VARCHAR(255) NOT NULL,
+  FOREIGN KEY (id_pasien) REFERENCES pasien (id_pasien),
+  FOREIGN KEY (id_dokter) REFERENCES dokter (id_dokter)
+);
+CREATE TABLE resep_obat (
+  id_obat VARCHAR(3) NOT NULL,
+  id_berobat INT(11) NOT NULL,
+  PRIMARY KEY (id_obat, id_berobat),
+  FOREIGN KEY (id_obat) REFERENCES obat (id_obat),
+  FOREIGN KEY (id_berobat) REFERENCES berobat (id_berobat)
+);

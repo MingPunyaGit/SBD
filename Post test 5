@@ -5,6 +5,13 @@ SELECT logproyek.PegawaiID, pegawai.Nama, logproyek.ID, logproyek.JamKerja
 FROM logproyek
 JOIN pegawai ON logproyek.PegawaiID = pegawai.ID
 WHERE logproyek.JamKerja > 80;
+SELECT logproyek.PegawaiID, pegawai.Nama, logproyek.ID, logproyek.JamKerja,
+CASE
+WHEN logproyek.JamKerja >= 100 THEN 'Pelatihan Lanjutan'
+ELSE 'Pelatihan Dasar'
+END AS JenisPelatihan
+FROM logproyek
+JOIN pegawai ON logproyek.PegawaiID = pegawai.ID;
 
 
 CREATE TABLE `logproyek` (

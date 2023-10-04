@@ -1,103 +1,33 @@
-
 CREATE TABLE obat (
     id_obat VARCHAR(3) NOT NULL PRIMARY KEY,
-    nama_obat VARCHAR(50) NOT NULL,
-    ukuran_obat INT(11) NOT NULL,
-    satuan_obat ENUM('mg', 'ml', 'g') NOT NULL
+    nama_obat VARCHAR(50),
+    ukuran_obat INT(11),
+    satuan_obat ENUM('mg', 'ml', 'g')
 );
-
 CREATE TABLE pasien (
     id_pasien VARCHAR(3) NOT NULL PRIMARY KEY,
-    nama_pasien VARCHAR(50) NOT NULL,
-    alamat_pasien VARCHAR(255) NOT NULL,
-    email VARCHAR(50) NOT NULL
+    nama_pasien VARCHAR(58),
+    alamat_pasien VARCHAR(255),
+    email VARCHAR(50)
 );
-
+CREATE TABLE berobat (
+    id_berobat INT AUTO_INCREMENT PRIMARY KEY,
+    id_pasien VARCHAR(3),
+    id_dokter VARCHAR(3),
+    tgl_berobat DATETIME,
+    keluhan_pasien VARCHAR(256),
+    hasil_diagnosa VARCHAR(256)
+);
 CREATE TABLE dokter (
     id_dokter VARCHAR(3) NOT NULL PRIMARY KEY,
-    nama_dokter VARCHAR(50) NOT NULL,
-    telp_dokter VARCHAR(15) NOT NULL
-);
-
-CREATE TABLE berobat (
-    id_berobat INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_pasien VARCHAR(3) NOT NULL,
-    id_dokter VARCHAR(3) NOT NULL,
-    keluhan_pasien VARCHAR(255) NOT NULL,
-    pelaksanaan_pengobatan VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE resep_obat (
-    id_obat VARCHAR(3) NOT NULL,
-    id_berobat INT(11) NOT NULL,
-    PRIMARY KEY (id_obat, id_berobat)
-);
-CREATE TABLE obat (
-  id_obat VARCHAR(3) NOT NULL PRIMARY KEY,
-  nama_obat VARCHAR(50) NOT NULL,
-  ukuran_obat INT(11) NOT NULL,
-  satuan_obat ENUM('mg', 'ml', 'g') NOT NULL
-);
-CREATE TABLE pasien (
-  id_pasien VARCHAR(3) NOT NULL PRIMARY KEY,
-  nama_pasien VARCHAR(50) NOT NULL,
-  alamat_pasien VARCHAR(255) NOT NULL,
-  email VARCHAR(50) NOT NULL
-);
-CREATE TABLE dokter (
-  id_dokter VARCHAR(3) NOT NULL PRIMARY KEY,
-  nama_dokter VARCHAR(50) NOT NULL,
-  telp_dokter VARCHAR(15) NOT NULL
-);
-CREATE TABLE berobat (
-  id_berobat INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  id_pasien VARCHAR(3) NOT NULL,
-  id_dokter VARCHAR(3) NOT NULL,
-  tgl_berobat DATE NOT NULL,
-  keluhan_pasien VARCHAR(255) NOT NULL,
-  hasil_diagnosa VARCHAR(255) NOT NULL,
-  pelaksanaan_pengobatan VARCHAR(255) NOT NULL,
-  FOREIGN KEY (id_pasien) REFERENCES pasien (id_pasien),
-  FOREIGN KEY (id_dokter) REFERENCES dokter (id_dokter)
+    nama_dokter VARCHAR(50),
+    telp_dokter VARCHAR(15)
 );
 CREATE TABLE resep_obat (
-  id_obat VARCHAR(3) NOT NULL,
-  id_berobat INT(11) NOT NULL,
-  PRIMARY KEY (id_obat, id_berobat),
-  FOREIGN KEY (id_obat) REFERENCES obat (id_obat),
-  FOREIGN KEY (id_berobat) REFERENCES berobat (id_berobat)
+    id_berobat INT(11),
+    id_obat VARCHAR(3),
+    jumlah_obat INT(11),
+    PRIMARY KEY (id_berobat, id_obat),
+    FOREIGN KEY (id_berobat) REFERENCES berobat(id_berobat),
+    FOREIGN KEY (id_obat) REFERENCES obat(id_obat)
 );
-INSERT INTO obat (id_obat, nama_obat, ukuran_obat, satuan_obat)
-VALUES
-('001', 'Siavastatin', 18, 'mg'),
-('002', 'Cendo Lyteers Eye Drops', 15, 'ml'),
-('003', 'Counterpein Cool Gel', 15, 'g'),
-('004', 'Nea Kaolana Sirup', 128, 'ml');
-INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, email)
-VALUES
-('001', 'John Doe', 'Jl. Jendral Sudirman No. 1, Jakarta Selatan', 'johndoe@example.com'),
-('002', 'Jane Doe', 'Jl. Gatot Subroto No. 2, Jakarta Pusat', 'janedoe@example.com'),
-('003', 'Peter Parker', 'Jl. Thamrin No. 3, Jakarta Barat', 'peterparker@example.com'),
-('004', 'Clark Kent', 'Jl. Merdeka No. 4, Jakarta Timur', 'clarkkent@example.com');
-INSERT INTO dokter (id_dokter, nama_dokter, telp_dokter)
-VALUES
-('001', 'Dr. Andi', '081212345678'),
-('002', 'Dr. Budi', '081312345678'),
-('003', 'Dr. Cici', '081412345678'),
-('004', 'Dr. Dika', '081512345678');
-INSERT INTO berobat (id_berobat, id_pasien, id_dokter, tgl_berobat, keluhan_pasien, hasil_diagnosa, pelaksanaan_pengobatan)
-VALUES
-(1, '001', '001', '2023-07-20', 'Sakit kepala', 'Sakit kepala karena kelelahan', 'Obat sakit kepala'),
-(2, '002', '002', '2023-07-21', 'Demam', 'Demam karena flu', 'Obat penurun panas dan obat flu'),
-(3, '003', '003', '2023-07-22', 'Batuk', 'Batuk karena radang tenggorokan', 'Obat batuk dan obat radang tenggorokan'),
-(4, '004', '004', '2023-07-23', 'Alergi', 'Alergi karena debu', 'Obat antihistamin');
-INSERT INTO resep_obat (id_obat, id_berobat)
-VALUES
-('001', 1),
-('002', 2),
-('003', 3),
-('004', 4);
-INSERT INTO pasien (nama_pasien, no_rekam_medis, status_rawat, pelaksanaan_pengobatan, hasil_diagnosa, keluhan_pasien, tgl_berobat, id_dokter)
-VALUES ('Budiman', '1234567890', 'rawat_inap', 'Rawat Jalan', 'patah tulang', 'pusing, demam', NOW(), 'D03'),
-       ('Andi', '9876543210', 'rawat_inap', 'Rawat Inap', 'flu', 'sering buang air', NOW(), 'D04'),
-       ('Ratih', '0987654321', 'rawat_inap', 'Rujuk', 'kecelakaan', 'diare', NOW(), 'D05');

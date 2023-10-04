@@ -13,6 +13,10 @@ ELSE 'Pelatihan Dasar'
 END AS JenisPelatihan
 FROM logproyek
 JOIN pegawai ON logproyek.PegawaiID = pegawai.ID;
+SELECT pegawai.Nama, logproyek.ProyekID, proyek.Nama, logproyek.JamKerja
+FROM logproyek
+JOIN pegawai ON logproyek.PegawaiID = pegawai.ID
+JOIN proyek ON logproyek.ProyekID = proyek.ID;
 
 
 CREATE TABLE `logproyek` (

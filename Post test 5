@@ -1,2 +1,22 @@
 1.	Tampilkan semua pegawai yang memiliki usia di atas 25 Tahun  dengan struktur yang sama dengan hasil di bawah ini:
 2.	Tampilkan ID Pegawai, Nama Pegawai,  ID LOG, dengan JamKerja yang lebih dari 80 jam
+CREATE TABLE `logproyek` (
+  `ID` int(11) NOT NULL,
+  `PegawaiID` char(3) NOT NULL,
+  `ProyekID` char(4) NOT NULL,
+  `JamKerja` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `pegawai` (
+  `ID` char(3) NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `Usia` int(11) NOT NULL,
+  `Jabatan` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `proyek` (
+  `ID` char(4) NOT NULL,
+  `Nama` varchar(255) NOT NULL,
+  `TanggalMulai` date NOT NULL,
+  `TanggalSelesai` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -189,3 +189,16 @@ ORDER BY
   akun.username;
 
 4.	Tampilkan nama karakter dan jumlah pertandingannya yang lebih dari sama dengan 2
+SELECT
+  karakter.namaKarakter,
+  COUNT(*) AS 'Jumlah Pertandingan'
+FROM
+  pertandingan
+LEFT JOIN
+  karakter
+ON
+  pertandingan.IdKarakter = karakter.IdKarakter
+GROUP BY
+  pertandingan.IdKarakter
+HAVING
+  COUNT(*) >= 2;

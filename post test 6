@@ -1,0 +1,143 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `soal_6`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `akun`
+--
+
+CREATE TABLE `akun` (
+  `IdAkun` int(11) NOT NULL,
+  `username` varchar(30) DEFAULT NULL,
+  `gender` enum('L','P') DEFAULT NULL,
+  `TanggalBergabung` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `akun`
+--
+
+INSERT INTO `akun` (`IdAkun`, `username`, `gender`, `TanggalBergabung`) VALUES
+(1, 'NicD', 'L', '2020-10-14'),
+(2, 'CumanBisaOgre', 'L', '2021-07-07'),
+(3, 'PuhSepuh', 'P', '2020-02-20'),
+(4, 'AnakAlam', 'P', '2023-03-13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karakter`
+--
+
+CREATE TABLE `karakter` (
+  `IdKarakter` varchar(5) NOT NULL,
+  `namaKarakter` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `karakter`
+--
+
+INSERT INTO `karakter` (`IdKarakter`, `namaKarakter`) VALUES
+('LGN', 'Legion'),
+('MK', 'Monkey King'),
+('OG', 'Ogre'),
+('RBN', 'Robin'),
+('RH', 'Red Hood');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pertandingan`
+--
+
+CREATE TABLE `pertandingan` (
+  `IdPertandingan` int(11) NOT NULL,
+  `IdAkun` int(11) DEFAULT NULL,
+  `IdKarakter` varchar(5) DEFAULT NULL,
+  `Poin` int(11) NOT NULL,
+  `HasilPertandingan` enum('W','L') DEFAULT NULL,
+  `TanggalPertandingan` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pertandingan`
+--
+
+INSERT INTO `pertandingan` (`IdPertandingan`, `IdAkun`, `IdKarakter`, `Poin`, `HasilPertandingan`, `TanggalPertandingan`) VALUES
+(1, 1, 'RH', -5, 'L', '2023-10-03'),
+(2, 2, 'OG', 10, 'W', '2023-10-03'),
+(3, 2, 'LGN', -4, 'L', '2023-10-03'),
+(4, 3, 'MK', 8, 'W', '2023-10-05'),
+(5, 2, 'OG', 8, 'W', '2023-10-05'),
+(6, 1, 'RBN', 9, 'W', '2023-10-05'),
+(7, 4, 'MK', 5, 'W', '2023-10-06'),
+(8, 2, 'OG', -5, 'L', '2023-10-06');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `akun`
+--
+ALTER TABLE `akun`
+  ADD PRIMARY KEY (`IdAkun`);
+
+--
+-- Indexes for table `karakter`
+--
+ALTER TABLE `karakter`
+  ADD PRIMARY KEY (`IdKarakter`);
+
+--
+-- Indexes for table `pertandingan`
+--
+ALTER TABLE `pertandingan`
+  ADD PRIMARY KEY (`IdPertandingan`),
+  ADD KEY `IdAkun` (`IdAkun`),
+  ADD KEY `IdKarakter` (`IdKarakter`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `akun`
+--
+ALTER TABLE `akun`
+  MODIFY `IdAkun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pertandingan`
+--
+ALTER TABLE `pertandingan`
+  MODIFY `IdPertandingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pertandingan`
+--
+ALTER TABLE `pertandingan`
+  ADD CONSTRAINT `pertandingan_ibfk_1` FOREIGN KEY (`IdAkun`) REFERENCES `akun` (`IdAkun`),
+  ADD CONSTRAINT `pertandingan_ibfk_2` FOREIGN KEY (`IdKarakter`) REFERENCES `karakter` (`IdKarakter`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,1 +1,192 @@
+CREATE TABLE `berobat` (
+  `id_berobat` int(11) NOT NULL,
+  `id_pasien` varchar(3) DEFAULT NULL,
+  `id_dokter` varchar(3) DEFAULT NULL,
+  `tgl_berobat` date DEFAULT NULL,
+  `keluhan_pasien` varchar(255) DEFAULT NULL,
+  `hasil_diagnosa` varchar(255) DEFAULT NULL,
+  `pelaksanaan_pengobatan` enum('Rawat Jalan','Rawat Inap','Rujuk','Lainnya') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `berobat`
+--
+
+INSERT INTO `berobat` (`id_berobat`, `id_pasien`, `id_dokter`, `tgl_berobat`, `keluhan_pasien`, `hasil_diagnosa`, `pelaksanaan_pengobatan`) VALUES
+(1, 'P01', 'D03', '2023-10-01', 'pusing, demam', 'flu', 'Rawat Jalan'),
+(2, 'P02', 'D04', '2023-10-01', 'sering buang air', 'diare', 'Rawat Inap'),
+(3, 'P03', 'D04', '2023-10-01', 'kecelakaan', 'patah tulang', 'Rujuk'),
+(4, 'P01', 'D01', '2023-10-08', 'pusing, demam', 'flu', 'Rawat Jalan'),
+(5, 'P02', 'D01', '2023-10-08', 'sering buang air', 'diare', 'Rawat Inap');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokter`
+--
+
+CREATE TABLE `dokter` (
+  `id_dokter` varchar(3) NOT NULL,
+  `nama_dokter` varchar(50) DEFAULT NULL,
+  `telp_dokter` varchar(15) DEFAULT NULL,
+  `tarif_dokter` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`id_dokter`, `nama_dokter`, `telp_dokter`, `tarif_dokter`) VALUES
+('D01', 'Nila Anggia', '081277777771', 150000),
+('D02', 'Agata Filiana', '081277777772', 150000),
+('D03', 'Rosa Delima', '081277777773', 200000),
+('D04', 'Lukas Chrisantyo', '081277777774', 200000),
+('D05', 'Prayoga Adriansyah', '081277777775', 250000),
+('D06', 'Hasta Mahendra', '081277777776', 250000),
+('D07', 'Zulfa Utami', '081277777777', 300000),
+('D08', 'Jane Yolanda', '081277777778', 300000),
+('D09', 'Septi Farida', '081277777779', 350000),
+('D10', 'Yahya Mahendra', '081277777780', 350000),
+('D11', 'Lala Rahayu', '08127777781', 400000),
+('D12', 'Marwata Nainggolan', '081277777782', 400000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obat`
+--
+
+CREATE TABLE `obat` (
+  `id_obat` varchar(3) NOT NULL,
+  `nama_obat` varchar(50) DEFAULT NULL,
+  `ukuran_obat` int(11) DEFAULT NULL,
+  `satuan_obat` enum('mg','ml','g') DEFAULT NULL,
+  `harga_obat` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `obat`
+--
+
+INSERT INTO `obat` (`id_obat`, `nama_obat`, `ukuran_obat`, `satuan_obat`, `harga_obat`) VALUES
+('O01', 'Simvastatin', 10, 'mg', 390),
+('O02', 'Sanmol', 500, 'mg', 2058),
+('O03', 'Cendo Lyteers Eye Drops', 15, 'ml', 32000),
+('O04', 'Counterpain Cool Gel', 15, 'g', 30595),
+('O05', 'Neo Kaolana Sirup', 120, 'ml', 18621),
+('O06', 'Actifed Cough (Merah) Syrup', 60, 'ml', 776),
+('O07', 'Vometa Flash', 10, 'mg', 5900),
+('O08', 'Omeprazole', 20, 'mg', 600),
+('O09', 'Lacto B Sachet', 1, 'g', 9300);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pasien`
+--
+
+CREATE TABLE `pasien` (
+  `id_pasien` varchar(3) NOT NULL,
+  `nama_pasien` varchar(50) DEFAULT NULL,
+  `alamat_pasien` varchar(255) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pasien`
+--
+
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `alamat_pasien`, `email`) VALUES
+('P01', 'roger', 'Jl. Mawar no 10', 'roger@email.com'),
+('P02', 'rika', 'Jl. Anggur No 40', 'rika@email.com'),
+('P03', 'rupawan', 'Gang Matahari I No 90', 'rupawan@email.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resep_obat`
+--
+
+CREATE TABLE `resep_obat` (
+  `id_obat` varchar(3) NOT NULL,
+  `id_berobat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resep_obat`
+--
+
+INSERT INTO `resep_obat` (`id_obat`, `id_berobat`) VALUES
+('O01', 1),
+('O02', 1),
+('O05', 2);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `berobat`
+--
+ALTER TABLE `berobat`
+  ADD PRIMARY KEY (`id_berobat`),
+  ADD KEY `id_pasienFK` (`id_pasien`),
+  ADD KEY `id_dokterFK` (`id_dokter`);
+
+--
+-- Indexes for table `dokter`
+--
+ALTER TABLE `dokter`
+  ADD PRIMARY KEY (`id_dokter`);
+
+--
+-- Indexes for table `obat`
+--
+ALTER TABLE `obat`
+  ADD PRIMARY KEY (`id_obat`);
+
+--
+-- Indexes for table `pasien`
+--
+ALTER TABLE `pasien`
+  ADD PRIMARY KEY (`id_pasien`);
+
+--
+-- Indexes for table `resep_obat`
+--
+ALTER TABLE `resep_obat`
+  ADD PRIMARY KEY (`id_obat`,`id_berobat`),
+  ADD KEY `id_berobatFK` (`id_berobat`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `berobat`
+--
+ALTER TABLE `berobat`
+  MODIFY `id_berobat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `berobat`
+--
+ALTER TABLE `berobat`
+  ADD CONSTRAINT `id_dokterFK` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`),
+  ADD CONSTRAINT `id_pasienFK` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`);
+
+--
+-- Constraints for table `resep_obat`
+--
+ALTER TABLE `resep_obat`
+  ADD CONSTRAINT `id_berobatFK` FOREIGN KEY (`id_berobat`) REFERENCES `berobat` (`id_berobat`),
+  ADD CONSTRAINT `id_obatFK` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

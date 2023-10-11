@@ -157,3 +157,17 @@ GROUP BY
   akun.IdAkun;
 
 2.	Tampilkan username, tanggal bergabung, dan total poin dari pertandingan setiap akun, lalu urutkan dari total poin terkecil 
+SELECT
+  akun.username,
+  akun.TanggalBergabung,
+  SUM(pertandingan.Poin) AS 'Total Poin'
+FROM
+  akun
+LEFT JOIN
+  pertandingan
+ON
+  akun.IdAkun = pertandingan.IdAkun
+GROUP BY
+  akun.IdAkun
+ORDER BY
+  SUM(pertandingan.Poin) ASC;

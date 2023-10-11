@@ -173,3 +173,17 @@ ORDER BY
   SUM(pertandingan.Poin) ASC;
 
 3.	Tampilkan Poin terbanyak dan paling sedikit untuk setiap akun dan urutkan berdasarkan nama akun 
+SELECT
+  akun.username,
+  MAX(pertandingan.Poin) AS 'Poin Terbanyak',
+  MIN(pertandingan.Poin) AS 'Poin Paling Sedikit'
+FROM
+  akun
+LEFT JOIN
+  pertandingan
+ON
+  akun.IdAkun = pertandingan.IdAkun
+GROUP BY
+  akun.IdAkun
+ORDER BY
+  akun.username;

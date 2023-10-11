@@ -171,3 +171,5 @@ GROUP BY
   akun.IdAkun
 ORDER BY
   SUM(pertandingan.Poin) ASC;
+
+3.	Tampilkan Poin terbanyak dan paling sedikit untuk setiap akun dan urutkan berdasarkan nama akun 

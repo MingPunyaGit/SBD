@@ -144,3 +144,14 @@ COMMIT;
 
 
 1.	Tampilkan setiap akun dengan jumlah pertandingannya dan sesuaikan penamaan kolom nya
+SELECT
+  akun.username AS 'Nama Akun',
+  COUNT(*) AS 'Jumlah Pertandingan'
+FROM
+  akun
+LEFT JOIN
+  pertandingan
+ON
+  akun.IdAkun = pertandingan.IdAkun
+GROUP BY
+  akun.IdAkun;

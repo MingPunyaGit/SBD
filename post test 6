@@ -187,3 +187,5 @@ GROUP BY
   akun.IdAkun
 ORDER BY
   akun.username;
+
+4.	Tampilkan nama karakter dan jumlah pertandingannya yang lebih dari sama dengan 2

@@ -155,3 +155,5 @@ ON
   akun.IdAkun = pertandingan.IdAkun
 GROUP BY
   akun.IdAkun;
+
+2.	Tampilkan username, tanggal bergabung, dan total poin dari pertandingan setiap akun, lalu urutkan dari total poin terkecil 

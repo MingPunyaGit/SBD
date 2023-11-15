@@ -4,3 +4,34 @@
 
 3.	Tampilkan nama perusahaan dan jenis perusahaan supermarket dengan ketentuan jenis “Supermarket” diganti menjadi “Super-market”. Dilarang mengganti secara manual dan harus mengganti dengan menggunakan operator dan fungsi SQL. 
 Tampilkan nama perusahaan, inisial nama direktur perusahaan, dan tambahkan kolom Validasi yang berisi : Jika nama dari direktur perusahaan  adalah ‘Carl Johnson’ maka akan menampilkan “Carl Johnson, Sarjana Komedi”. Selain dari itu, akan menampilkan “Bukan Carl Johson lurrr :)”
+
+
+SELECT
+  tanggal,
+  DATE_FORMAT(tanggal, '%A, %d/%m/%Y') AS tanggal_format
+FROM perusahaan;
+
+SELECT
+  namaPerusahaan,
+  namaJenis,
+  namaDirektur,
+  UPPER(REVERSE(deskripsi)) AS deskripsi_terbalik
+FROM perusahaan
+ORDER BY tanggal;
+
+SELECT
+  namaPerusahaan,
+  CONCAT('Super-', namaJenis) AS namaJenis
+FROM perusahaan
+WHERE namaJenis = 'Supermarket';
+
+SELECT
+  namaPerusahaan,
+  LEFT(namaDirektur, 1) AS inisialDirektur,
+  CASE
+    WHEN namaDirektur = 'Carl Johnson' THEN 'Carl Johnson, Sarjana Komedi'
+    ELSE 'Bukan Carl Johson lurrr :)'
+  END AS validasi
+FROM perusahaan
+WHERE namaJenis = 'Supermarket';
+

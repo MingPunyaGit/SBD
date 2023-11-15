@@ -1,4 +1,4 @@
-1.	Tampilkan Tanggal yang asli dan tampilkan Tanggal yang menggunakan format: Hari, Tanggal / Bulan / Tahun.
+hi1.	Tampilkan Tanggal yang asli dan tampilkan Tanggal yang menggunakan format: Hari, Tanggal / Bulan / Tahun.
 
 2.	Tampilkan semua nama perusahaan (beserta nama jenisnya), nama direktur, dan deskripsi yang kalimatnya terbalik dan huruf besar semua. Urutkan sesuai tanggalnya.
 
@@ -68,3 +68,23 @@ JOIN PT9_NIM.direktur ON perusahaan.idDirektur = direktur.idDirektur
 ORDER BY tanggal;
 
 
+-- 3. Tampilkan nama perusahaan dan jenis perusahaan supermarket dengan ketentuan jenis “Supermarket” diganti menjadi “Super-market”.
+
+SELECT 
+  namaPerusahaan,
+  REPLACE(namaJenis, 'Supermarket', 'Super-market') AS 'Jenis Perusahaan'
+FROM PT9_NIM.perusahaan
+JOIN PT9_NIM.jenis ON perusahaan.idJenis = jenis.idJenis
+WHERE jenis.namaJenis = 'Supermarket';
+
+-- Bonus: Tampilkan nama perusahaan, inisial nama direktur perusahaan, dan tambahkan kolom Validasi.
+
+SELECT 
+  namaPerusahaan,
+  CONCAT(LEFT(namaDirektur, 1), '.') AS 'Inisial Direktur',
+  CASE 
+    WHEN namaDirektur = 'Carl Johnson' THEN 'Carl Johnson, Sarjana Komedi'
+    ELSE 'Bukan Carl Johson lurrr :)'
+  END AS 'Validasi'
+FROM PT9_NIM.perusahaan
+JOIN PT9_NIM.direktur ON perusahaan.idDirektur = direktur.idDirektur;

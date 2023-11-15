@@ -12,12 +12,23 @@ SELECT
 FROM perusahaan;
 
 SELECT
-  namaPerusahaan,
-  namaJenis,
-  namaDirektur,
-  UPPER(REVERSE(deskripsi)) AS deskripsi_terbalik
-FROM perusahaan
-ORDER BY tanggal;
+  perusahaan.nama_perusahaan,
+  jenis.nama_jenis,
+  direktur.nama_direktur,
+  REVERSE(UPPER(deskripsi)) AS deskripsi
+FROM
+  perusahaan
+INNER JOIN
+  jenis
+ON
+  perusahaan.id_jenis = jenis.id_jenis
+INNER JOIN
+  direktur
+ON
+  perusahaan.id_direktur = direktur.id_direktur
+ORDER BY
+  tanggal;
+
 
 SELECT
   namaPerusahaan,

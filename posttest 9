@@ -47,3 +47,13 @@ ORDER BY
   tanggal;
 
 
+SELECT 
+  CONCAT(UPPER(REVERSE(namaPerusahaan)), ', ', UPPER(REVERSE(namaJenis))), 
+  UPPER(REVERSE(namaDirektur)), 
+  UPPER(REVERSE(deskripsi)) 
+FROM PT9_NIM.perusahaan
+JOIN PT9_NIM.jenis ON perusahaan.idJenis = jenis.idJenis
+JOIN PT9_NIM.direktur ON perusahaan.idDirektur = direktur.idDirektur
+ORDER BY tanggal;
+
+

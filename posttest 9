@@ -35,3 +35,15 @@ SELECT
 FROM perusahaan
 WHERE namaJenis = 'Supermarket';
 
+
+SELECT
+  nama_perusahaan,
+  jenis,
+  nama_direktur,
+  REVERSE(UPPER(deskripsi)) AS deskripsi
+FROM
+  perusahaan
+ORDER BY
+  tanggal;
+
+

@@ -1,0 +1,74 @@
+CREATE TABLE `departemen` (
+  `id_departemen` int(11) NOT NULL,
+  `nama_departemen` varchar(255) NOT NULL,
+  `region` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `departemen`
+--
+
+INSERT INTO `departemen` (`id_departemen`, `nama_departemen`, `region`) VALUES
+(1, 'Finance', 2),
+(2, 'IT', 2),
+(3, 'Marketing', 1),
+(4, 'HRD', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `id_karyawan` int(11) NOT NULL,
+  `nama_depan` varchar(50) NOT NULL,
+  `nama_belakang` varchar(50) NOT NULL,
+  `gaji` int(11) NOT NULL,
+  `id_departemen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`id_karyawan`, `nama_depan`, `nama_belakang`, `gaji`, `id_departemen`) VALUES
+(110, 'Emil', 'Artanti', 4000000, 1),
+(111, 'Rino', 'Cheros', 3000000, 4),
+(112, 'Regina', 'Bella', 5000000, 1),
+(113, 'Richard', 'Adinata', 3500000, 3),
+(114, 'Angeline', 'Novi', 3500000, 2),
+(115, 'Tomi', 'Sudiro', 2000000, 1),
+(116, 'Setiawan', 'Setiawan', 1500000, 2);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `departemen`
+--
+ALTER TABLE `departemen`
+  ADD PRIMARY KEY (`id_departemen`);
+
+--
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`id_karyawan`),
+  ADD KEY `fk_dept` (`id_departemen`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD CONSTRAINT `fk_dept` FOREIGN KEY (`id_departemen`) REFERENCES `departemen` (`id_departemen`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

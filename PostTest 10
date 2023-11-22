@@ -102,3 +102,13 @@ ALTER TABLE `detail_asisten`
   ADD CONSTRAINT `detail_asisten_ibfk_1` FOREIGN KEY (`id_jabatan_asisten`) REFERENCES `jabatanasisten` (`id_jabatan_asisten`),
   ADD CONSTRAINT `detail_asisten_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`);
 COMMIT;
+
+1.	Tampilkan NIM mahasiswa yang menjadi asisten! (Tanpa menggunakan JOIN)
+
+2.	Tampilkan nim, matakuliah dimana mahasiswa yang berjabatan “Asisten Laboratorium” ” (Tanpa menggunakan JOIN)
+
+3.	Tampilkan Nama mahasiswa dan Nim mahasiswa yang memiliki total jam kerja asistensi lebih dari 25 jam, WAJIB MENGGUNAKAN SUB QUERY & TIDAK MENGGUNAKAN JOIN.
+
+4. Tampilkan nama asisten, nama mata kuliah, group mata kuliah, jam kerja asisten tiap mata kuliah, beserta kolom Ranking yang memberikan ranking dari jam kerja terbanyak. 
+
+Clue : Menggunakan distinct pada subquery

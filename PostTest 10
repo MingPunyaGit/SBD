@@ -112,3 +112,24 @@ COMMIT;
 4. Tampilkan nama asisten, nama mata kuliah, group mata kuliah, jam kerja asisten tiap mata kuliah, beserta kolom Ranking yang memberikan ranking dari jam kerja terbanyak. 
 
 Clue : Menggunakan distinct pada subquery
+
+
+
+SELECT nama, nim
+FROM mahasiswa
+WHERE nim IN (
+    SELECT nim
+    FROM detail_asisten
+    GROUP BY nim
+    HAVING SUM(jamkerja) > 25
+);
+
+
+SELECT DISTINCT
+    (SELECT nama FROM mahasiswa WHERE nim = d.nim) AS nama_asisten,
+    d.matakuliah,
+    d.group,
+    d.jamkerja,
+    RANK() OVER (PARTITION BY d.matakuliah, d.group ORDER BY d.jamkerja DESC) AS Ranking
+FROM detail_asisten d;
+
